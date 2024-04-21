@@ -1,6 +1,7 @@
 "use client";
 
 import { useOrganizationList } from "@clerk/nextjs";
+import Item from "./item";
 
 export default function OrgList() {
   const { userMemberships } = useOrganizationList({
@@ -14,11 +15,8 @@ export default function OrgList() {
   return (
     <ul className="space-y-4">
       {userMemberships.data.map((membership) => {
-        return (
-          <li key={membership.organization.id}>
-            {membership.organization.name}
-          </li>
-        );
+        const { id, name, imageUrl } = membership.organization;
+        return <Item key={id} id={id} name={name} imageUrl={imageUrl} />;
       })}
     </ul>
   );
